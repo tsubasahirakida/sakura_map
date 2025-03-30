@@ -1,0 +1,160 @@
+# Sakura Map Project Rules
+
+## Project Intelligence
+
+This file captures important patterns, preferences, and project intelligence for the Sakura Map project. It serves as a learning journal to help work more effectively with the codebase.
+
+## Coding Standards
+
+### General
+
+- Use TypeScript for all JavaScript files
+- Follow ESLint and Prettier configurations
+- Use functional components with hooks for React components
+- Prefer named exports over default exports
+- Use async/await for asynchronous operations
+- Add JSDoc comments for functions and components
+
+### File Structure
+
+- Use kebab-case for file names (e.g., `avatar-selector.tsx`)
+- Group related components in subdirectories
+- Place shared utilities in the `lib` directory
+- Place reusable hooks in the `hooks` directory
+- Place global types in the `types` directory
+
+### Component Structure
+
+- Follow Atomic Design principles (atoms, molecules, organisms, templates, pages)
+- Use the `.tsx` extension for React components
+- Separate component logic from presentation when appropriate
+- Co-locate component styles with the component
+- Export component types along with the component
+
+### Naming Conventions
+
+- PascalCase for component names (e.g., `AvatarSelector`)
+- camelCase for variables, functions, and instances
+- UPPER_CASE for constants
+- Use descriptive, intention-revealing names
+- Prefix boolean variables with `is`, `has`, or `should`
+
+### State Management
+
+- Use React Context for global state
+- Use React Query for server state
+- Use local state for component-specific state
+- Avoid prop drilling by using context or custom hooks
+
+## Project-Specific Patterns
+
+### Avatar System
+
+- Avatars are stored by type in local storage
+- Avatar types are defined as string constants
+- Avatar selection happens before accessing the map
+- Avatar images are stored in the `public/avatars` directory
+
+### Map Visualization
+
+- Japan map is divided into prefectures
+- Each prefecture can have multiple hanami spots
+- Bloom status is represented by color coding
+- Clicking on a spot navigates to the hanami spot view
+
+### Hanami Spot Environment
+
+- Each spot has a unique environment design
+- Environment is rendered using a 2D engine
+- Character position is tracked in x,y coordinates
+- Other users are rendered based on real-time data
+
+### User Presence
+
+- Users are identified by anonymous IDs
+- User positions are synchronized via Supabase Realtime
+- Users in the same location can see each other
+- User movement is throttled to reduce network traffic
+
+## Critical Implementation Paths
+
+### User Authentication Flow
+
+1. Check for existing anonymous session in local storage
+2. If none exists, create a new anonymous session
+3. Store session token in local storage
+4. Use session for all subsequent API calls
+
+### Map Interaction Flow
+
+1. Fetch cherry blossom data from API or use mock data
+2. Render Japan map with bloom status indicators
+3. Handle user interaction (hovering, clicking)
+4. Navigate to selected hanami spot
+
+### Real-time User Presence Flow
+
+1. Subscribe to Supabase Realtime channel for the location
+2. Update user position as they move
+3. Receive position updates from other users
+4. Render other users at their current positions
+
+## Known Challenges
+
+### Performance Optimization
+
+- Throttle position updates to reduce network traffic
+- Use efficient rendering techniques for the 2D environment
+- Implement lazy loading for assets
+- Optimize for mobile devices with limited resources
+
+### Cross-Browser Compatibility
+
+- Test on major browsers (Chrome, Firefox, Safari, Edge)
+- Ensure touch controls work on mobile devices
+- Handle different screen sizes and orientations
+
+### Real-time Synchronization
+
+- Handle network disconnections gracefully
+- Implement reconnection logic
+- Provide fallback for offline mode
+
+## Tool Usage Patterns
+
+### Next.js
+
+- Use App Router for routing
+- Use Server Components for static content
+- Use Client Components for interactive elements
+- Use API Routes for backend functionality
+
+### Supabase
+
+- Use Supabase Auth for anonymous sessions
+- Use Supabase Database for structured data
+- Use Supabase Realtime for user presence
+- Use Row Level Security for data access control
+
+### Tailwind CSS
+
+- Use utility classes for styling
+- Use responsive prefixes for different screen sizes
+- Use custom theme for project-specific colors
+- Use component classes for consistent styling
+
+## User Preferences
+
+- Prioritize simplicity and intuitive design
+- Ensure responsive design works well on mobile
+- Maintain Animal Crossing-like aesthetic
+- Keep loading times minimal
+
+## Evolution of Project Decisions
+
+- Initially using mock data for cherry blossom status
+- Planning to integrate with actual API later
+- Starting with basic avatar selection
+- Potential for more customization options in the future
+- Beginning with simple multi-user functionality
+- Possibility to add more social features later
